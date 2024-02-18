@@ -63,8 +63,8 @@ AllowShortCompoundRequirementOnASingleLine: true
 AllowShortEnumsOnASingleLine: true
 AllowShortFunctionsOnASingleLine: Inline
 AllowShortIfStatementsOnASingleLine: WithoutElse
-AllowShortLambdasOnASingleLine: Inline
-AllowShortLoopsOnASingleLine: false
+AllowShortLambdasOnASingleLine: Empty
+AllowShortLoopsOnASingleLine: true
 
 ## Don't do this horrible thing that comes decades ago, NEVER EVER.
 AlwaysBreakAfterDefinitionReturnType: None
@@ -294,7 +294,7 @@ SpaceBeforeParensOptions:
     AfterOverloadedOperator: false
     AfterPlacementOperator: true
     AfterRequiresInClause: true
-    AfterRequiresInExpression: false
+    AfterRequiresInExpression: true
     BeforeNonEmptyParentheses: false
 SpaceBeforeRangeBasedForLoopColon: true
 SpaceBeforeSquareBrackets: false

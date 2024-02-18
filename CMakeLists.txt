@@ -1,24 +1,23 @@
 cmake_minimum_required(VERSION 3.25)
 project(template VERSION 0.1.0 LANGUAGES CXX)
 
-## ---------------------- ##
-## Global CMake Variables ##
-## ---------------------- ##
+## -------------------------- ##
+##   Global CMake Variables   ##
+## -------------------------- ##
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
-set(CXX_FILE_EXTENSIONS ".cpp;.hpp;.cxx;.hxx;.cc;.hh")
 
-## ---------------- ##
-## Compiler Options ##
-## ---------------- ##
-add_library(options INTERFACE)
+## -------------------------- ##
+##      Compiler Options      ##
+## -------------------------- ##
+add_library(CompileOptions INTERFACE)
 
 if (CMAKE_CXX_COMPILER_ID MATCHES "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-    target_compile_options(options INTERFACE
+    target_compile_options(CompileOptions INTERFACE
         ## Warnings
         -Wall -Wextra # Enable all warnings
 
@@ -63,13 +62,13 @@ if (CMAKE_CXX_COMPILER_ID MATCHES "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "Clang"
     )
 
     if (CMAKE_CXX_COMPILER_ID MATCHES "GNU")
-        target_compile_options(options INTERFACE -fdiagnostics-color=always)
+        target_compile_options(CompileOptions INTERFACE -fdiagnostics-color=always)
     else()
-        target_compile_options(options INTERFACE -fcolor-diagnostics)
+        target_compile_options(CompileOptions INTERFACE -fcolor-diagnostics)
     endif()
 
 elseif (CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
-    target_compile_options(options INTERFACE
+    target_compile_options(CompileOptions INTERFACE
         /W4 # Enable all warnings
         /wd4201 # Disable warnings for nonstandard extension used: nameless struct/union
         /utf-8 # Set source and execution character set to UTF-8
@@ -81,26 +80,24 @@ elseif (CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
 endif()
 
 if (WIN32)
-    target_compile_definitions(options INTERFACE
+    target_compile_definitions(CompileOptions INTERFACE
         _CRT_SECURE_NO_WARNINGS # Disable warnings for unsafe functions
         _CRT_SECURE_NO_WARNINGS_GLOBALS # Disable warnings for unsafe functions
         _CRT_NONSTDC_NO_WARNINGS # Disable warnings for non-ANSI functions
     )
 endif()
 
-## --------------------------- ##
-## Source files and Executable ##
-## --------------------------- ##
-target_include_directories(options INTERFACE
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+## -------------------------- ##
+##    Include Directories     ##
+## -------------------------- ##
+add_library(Includes INTERFACE)
+target_include_directories(Includes INTERFACE
+    $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include>
 )
 
-set(SOURCES "")
-foreach(EXTENSION ${CXX_FILE_EXTENSIONS})
-    file(GLOB_RECURSE FILES ${PROJECT_SOURCE_DIR}/include/*${EXTENSION} ${PROJECT_SOURCE_DIR}/src/*${EXTENSION})
-    list(APPEND SOURCES ${FILES})
-endforeach()
-
-add_executable(${PROJECT_NAME} ${SOURCES})
-target_link_libraries(${PROJECT_NAME} PRIVATE options)
+## -------------------------- ##
+##         Executable         ##
+## -------------------------- ##
+add_executable(${PROJECT_NAME} src/Main.cc)
+target_link_libraries(${PROJECT_NAME} PRIVATE CompileOptions Includes)

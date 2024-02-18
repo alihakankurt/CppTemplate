@@ -11,6 +11,7 @@
 #include <functional>
 #include <iostream>
 #include <memory>
+#include <new>
 #include <sstream>
 #include <string>
 #include <type_traits>
