@@ -60,10 +60,10 @@ AllowBreakBeforeNoexceptSpecifier: Never
 AllowShortBlocksOnASingleLine: Empty
 AllowShortCaseLabelsOnASingleLine: true
 AllowShortCompoundRequirementOnASingleLine: true
-AllowShortEnumsOnASingleLine: true
+AllowShortEnumsOnASingleLine: false
 AllowShortFunctionsOnASingleLine: Inline
-AllowShortIfStatementsOnASingleLine: WithoutElse
-AllowShortLambdasOnASingleLine: Empty
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLambdasOnASingleLine: Inline
 AllowShortLoopsOnASingleLine: true
 
 ## Don't do this horrible thing that comes decades ago, NEVER EVER.
@@ -270,9 +270,9 @@ RequiresExpressionIndentation: OuterScope
 ## Put an empty line in each definition for readability.
 SeperateDefinitionBlocks: Always
 
-## Sort the `#include` blocks and using declarations.
-SortIncludes: CaseInsensitive
-SortUsingDeclarations: Lexicographic
+## Don't change order of `#include` blocks and `using` statements.
+SortIncludes: Never
+SortUsingDeclarations: Never
 
 ## Spaceing.
 SpaceAfterCStyleCast: false

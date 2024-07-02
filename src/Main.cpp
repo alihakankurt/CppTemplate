@@ -1,5 +1,5 @@
 #include <iostream>
-#include <Core.hh>
+#include <Core.hpp>
 
 int main(int argc, const char* argv[])
 {

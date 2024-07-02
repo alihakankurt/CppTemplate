@@ -1,5 +1,5 @@
-cmake_minimum_required(VERSION 3.25)
-project(template VERSION 0.1.0 LANGUAGES CXX)
+cmake_minimum_required(VERSION 3.28)
+project(Template VERSION 0.1.0 LANGUAGES CXX)
 
 ## -------------------------- ##
 ##   Global CMake Variables   ##
@@ -7,9 +7,9 @@ project(template VERSION 0.1.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/Bin)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/Bin)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/Bin)
 
 ## -------------------------- ##
 ##      Compiler Options      ##
@@ -60,13 +60,6 @@ if (CMAKE_CXX_COMPILER_ID MATCHES "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "Clang"
         $<$<CONFIG:Debug>:-O0 -g3 -ggdb3>
         $<$<CONFIG:Release>:-O3 -march=native>
     )
-
-    if (CMAKE_CXX_COMPILER_ID MATCHES "GNU")
-        target_compile_options(CompileOptions INTERFACE -fdiagnostics-color=always)
-    else()
-        target_compile_options(CompileOptions INTERFACE -fcolor-diagnostics)
-    endif()
-
 elseif (CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
     target_compile_options(CompileOptions INTERFACE
         /W4 # Enable all warnings
@@ -99,5 +92,5 @@ target_include_directories(Includes INTERFACE
 ## -------------------------- ##
 ##         Executable         ##
 ## -------------------------- ##
-add_executable(${PROJECT_NAME} src/Main.cc)
+add_executable(${PROJECT_NAME} src/Main.cpp)
 target_link_libraries(${PROJECT_NAME} PRIVATE CompileOptions Includes)
