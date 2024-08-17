@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.28)
-project(Template VERSION 0.1.0 LANGUAGES CXX)
+project(Template VERSION 0.0.1 LANGUAGES CXX)
 
 ## -------------------------- ##
 ##   Global CMake Variables   ##
@@ -85,12 +85,12 @@ endif()
 ## -------------------------- ##
 add_library(Includes INTERFACE)
 target_include_directories(Includes INTERFACE
-    $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
-    $<INSTALL_INTERFACE:include>
+    $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/Include>
+    $<INSTALL_INTERFACE:Source>
 )
 
 ## -------------------------- ##
 ##         Executable         ##
 ## -------------------------- ##
-add_executable(${PROJECT_NAME} src/Main.cpp)
+add_executable(${PROJECT_NAME} Source/Main.cpp)
 target_link_libraries(${PROJECT_NAME} PRIVATE CompileOptions Includes)

@@ -1,22 +1,22 @@
 # Template for C++ Projects
 
 ## Description
-This is a template for C++ projects. It includes a Makefile for building the project, a directory structure for organizing the source code, and a README.md file for describing the project.
+This is a template for C++ projects. It contains CMakeLists.txt file for building the project, and has well-structured directories for source code and headers.
 
 ## Build
 ```console
-% cmake -S . -B build
-% cmake --build build
+% cmake -S . -B Build
+% cmake --build Build
 ```
 
 ## Run
 ```console
-% ./bin/executable
+% ./Bin/<executable>
 ```
 
 ## Clean
 ```console
-% rm -rf bin build
+% rm -rf Bin Build
 ```
 
 ## License
