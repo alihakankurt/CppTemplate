@@ -11,6 +11,7 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/Bin)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/Bin)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/Bin)
 
+
 ## -------------------------- ##
 ##      Compiler Options      ##
 ## -------------------------- ##
@@ -80,17 +81,38 @@ if (WIN32)
     )
 endif()
 
+
 ## -------------------------- ##
 ##    Include Directories     ##
 ## -------------------------- ##
 add_library(Includes INTERFACE)
 target_include_directories(Includes INTERFACE
     $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/Include>
-    $<INSTALL_INTERFACE:Source>
+    $<INSTALL_INTERFACE:Include>
 )
+
 
 ## -------------------------- ##
 ##         Executable         ##
 ## -------------------------- ##
-add_executable(${PROJECT_NAME} Source/Main.cpp)
+set(SOURCE_FILES
+    Source/Main.cpp
+)
+
+add_executable(${PROJECT_NAME} ${SOURCE_FILES})
+target_include_directories(${PROJECT_NAME} PRIVATE $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/Source>)
 target_link_libraries(${PROJECT_NAME} PRIVATE CompileOptions Includes)
+
+
+## -------------------------- ##
+##       Installation         ##
+## -------------------------- ##
+install(TARGETS ${PROJECT_NAME} EXPORT ${PROJECT_NAME}Targets
+    RUNTIME DESTINATION ${CMAKE_INSTALL_PREFIX}/Bin
+    LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/Lib
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_PREFIX}/Lib
+)
+
+install(DIRECTORY ${PROJECT_SOURCE_DIR}/Include/ DESTINATION ${CMAKE_INSTALL_PREFIX}/Include)
+
+install(FILES ${PROJECT_SOURCE_DIR}/LICENSE DESTINATION ${CMAKE_INSTALL_PREFIX})
