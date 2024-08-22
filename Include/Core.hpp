@@ -1,5 +1,4 @@
-#ifndef __CORE_HH__
-#define __CORE_HH__
+#pragma once
 
 #include <algorithm>
 #include <array>
@@ -40,5 +39,3 @@ namespace core
     using f32 = std::float_t;
     using f64 = std::double_t;
 }
-
-#endif
