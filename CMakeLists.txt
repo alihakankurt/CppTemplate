@@ -1,10 +1,11 @@
-cmake_minimum_required(VERSION 3.28)
-project(Template VERSION 0.0.1 LANGUAGES CXX)
+cmake_minimum_required(VERSION 4.0.1)
+project(hello VERSION 0.1.0 LANGUAGES CXX)
 
 ## -------------------------- ##
 ##   Global CMake Variables   ##
 ## -------------------------- ##
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/Bin)
@@ -21,41 +22,36 @@ if (CMAKE_CXX_COMPILER_ID MATCHES "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "Clang"
     target_compile_options(CompileOptions INTERFACE
         ## Warnings
         -Wall -Wextra # Enable all warnings
+        -Wshadow # Local variables shadowing another variable.
+        -Wcast-align # Casting that changes the alignment of pointers.
+        -Wconversion # Implicit conversions that may alter values.
+        -Wsign-conversion # Implicit conversions that may change the sign of integers.
+        -Wmissing-noreturn # Functions that could be declared with attribute `noreturn`.
+        -Wunreachable-code # Code that will never be executed.
+        -Wformat=2 # Stricter use of format strings.
 
-        -Wshadow # Warn whenever a local variable shadows another local variable
-        -Wcast-align # Warn whenever a cast changes the alignment of the pointer
-        -Wconversion # Warn for implicit conversions that may alter a value
-        -Wsign-conversion # Warn for implicit conversions that may change the sign of an integer value
-        -Wunused # Warn whenever a local variable is unused
-
-        -Wmissing-noreturn # Warn about functions which might be candidates for attribute noreturn
-        -Wunreachable-code # Warn about code that will never be executed
-
-        -Wformat=2 # Warn about format string problems
-
-        -Wno-unused-function # Disable warnings for unused functions
-        -Wno-unused-parameter # Disable warnings for unused parameters
+        ## No Warnings
+        -Wno-unused-function # No warnings for unused functions.
+        -Wno-unused-parameter # No warnings for unused parameters.
 
         ## Errors
-        -Werror=nonnull # Error when a null pointer constant is passed to [[nonnull]] parameter
-
-        -Werror=address # Error when a suspicious pointer usage is detected
-        -Werror=init-self # Error when a variable is initialized with itself
-        -Werror=uninitialized # Error when an uninitialized variable is used
-        -Werror=pointer-arith # Error on pointer arithmetic for void and function pointers
-        -Werror=write-strings # Error on writing to read-only memory
-
-        -Werror=return-type # Error when a return type is mismatched
-
-        -Werror=switch # Error on missing cases in switch statements
-        -Werror=implicit-fallthrough # Error on implicit fallthrough in switch statements
-
-        -Werror=missing-include-dirs # Error on missing include directories
+        -Werror=address # Suspicious uses of address expressions.
+        -Werror=init-self # Variables that are initialized with themselves.
+        -Werror=uninitialized # Variables that are used without having been initialized.
+        -Werror=pointer-arith # No void or function pointer arithmetic allowed.
+        -Werror=write-strings # C strings must be const char*.
+        -Werror=return-type # Mismatched function return types.
+        -Werror-string-compare # Unreasonable string comparisons.
+        -Werror=switch # Missing cases in switch statements.
+        -Werror=implicit-fallthrough # Implicit fallthroughs in switch statements.
+        -Werror=missing-include-dirs # Missing include directories that specified by the programmer.
 
         ## C++ specific
-        -Werror=delete-non-virtual-dtor # Error on deleting a non-virtual destructor
-        -Werror=missing-field-initializers # Error on missing field initializers
-        -Werror=pessimizing-move # Error on pessimizing move operations
+        -Werror=delete-non-virtual-dtor # Deleting non-virtual destructors.
+        -Werror=missing-field-initializers # Missing fields in initializers.
+        -Werror=pessimizing-move # Pessimizing move operations.
+        -fno-rtti # No RTTI.
+        -fno-exceptions # No standard exceptions.
 
         ## Optimization
         $<$<CONFIG:Debug>:-O0 -g3 -ggdb3>
@@ -63,9 +59,10 @@ if (CMAKE_CXX_COMPILER_ID MATCHES "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "Clang"
     )
 elseif (CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
     target_compile_options(CompileOptions INTERFACE
-        /W4 # Enable all warnings
-        /wd4201 # Disable warnings for nonstandard extension used: nameless struct/union
-        /utf-8 # Set source and execution character set to UTF-8
+        /W4 # All warnings.
+        /utf-8 # Source character set is UTF-8.
+        /wd4201 # No warnings for unnamed structs and unions.
+        /wd4505 # No warnings for unused functions.
 
         ## Optimization
         $<$<CONFIG:Debug>:/Od>
@@ -73,11 +70,12 @@ elseif (CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
     )
 endif()
 
+# On Windows, don't suggest about safe versions of functions.
 if (WIN32)
     target_compile_definitions(CompileOptions INTERFACE
-        _CRT_SECURE_NO_WARNINGS # Disable warnings for unsafe functions
-        _CRT_SECURE_NO_WARNINGS_GLOBALS # Disable warnings for unsafe functions
-        _CRT_NONSTDC_NO_WARNINGS # Disable warnings for non-ANSI functions
+        _CRT_SECURE_NO_WARNINGS
+        _CRT_SECURE_NO_WARNINGS_GLOBALS
+        _CRT_NONSTDC_NO_WARNINGS
     )
 endif()
 

@@ -1,22 +1,22 @@
 # Template for C++ Projects
 
 ## Description
-This is a template for C++ projects. It contains CMakeLists.txt file for building the project, and has well-structured directories for source code and headers.
+Initial project template for C++ projects.
 
 ## Build
-```console
-% cmake -S . -B Build
-% cmake --build Build
+```sh
+cmake -S . -B Build
+cmake --build Build
 ```
 
 ## Run
-```console
-% ./Bin/<executable>
+```sh
+./Bin/<executable>
 ```
 
 ## Clean
-```console
-% rm -rf Bin Build
+```sh
+rm -rf Bin Build
 ```
 
 ## License

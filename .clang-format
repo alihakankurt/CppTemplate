@@ -1,5 +1,5 @@
 ---
-# C++, latest standard.
+# C++ with latest standard.
 Language: Cpp
 Standard: Latest
 
@@ -27,7 +27,7 @@ AlignConsecutiveMacros: None
 # Align consecutive `case` labels that contains single line statements.
 AlignConsecutiveShortCaseStatements:
     Enabled: true
-    AcrossEmptyLine: true
+    AcrossEmptyLines: true
     AcrossComments: true
     AlignCaseColons: false
 
@@ -116,9 +116,6 @@ BreakBeforeConceptDeclarations: Always
 # Break before `?` and `:` in ternary expressions.
 BreakBeforeTernaryOperators: true
 
-# Break binary operators to place them either on a single line or one per line.
-BreakBinaryOperators: OnePerLine
-
 # Break after colon of constructor initializer.
 BreakConstructorInitializers: AfterColon
 
@@ -206,7 +203,7 @@ IndentWidth: 4
 # Indent function declaration if it somehow doesn't fit on a line.
 IndentWrappedFunctionNames: true
 
-# Do not insert anything to the file, just format it.
+# Don't insert anything to the file, just format it.
 InsertBraces: false
 InsertNewlineAtEOF: false
 InsertTrailingCommas: None
@@ -252,8 +249,8 @@ PointerAlignment: Left
 ReferenceAlignment: Left
 
 # Place qualifiers on the left of the type by this order.
-QualifierAlignment: Left
-QualifierOrder: ['friend', 'static', 'inline', 'constepxr', 'const', 'restrict', 'volatile', 'type']
+QualifierAlignment: Custom
+QualifierOrder: [friend, static, inline, constexpr, const, restrict, volatile, type]
 
 # Reflow the comments to make it more readable.
 ReflowComments: true
@@ -265,13 +262,13 @@ RequiresClausePosition: OwnLine
 RequiresExpressionIndentation: OuterScope
 
 # Insert an empty line in each definition for readability.
-SeperateDefinitionBlocks: Always
+SeparateDefinitionBlocks: Always
 
 # Don't change order of `#include` blocks and `using` statements.
 SortIncludes: Never
 SortUsingDeclarations: Never
 
-# Spaceing.
+# Spacing.
 SpaceAfterCStyleCast: false
 SpaceAfterLogicalNot: false
 SpaceAfterTemplateKeyword: true
@@ -283,7 +280,7 @@ SpaceBeforeCtorInitializerColon: true
 SpaceBeforeInheritanceColon: true
 SpaceBeforeParens: Custom
 SpaceBeforeParensOptions:
-    AfterControlStatement: true
+    AfterControlStatements: true
     AfterForeachMacros: true
     AfterFunctionDeclarationName: false
     AfterFunctionDefinitionName: false

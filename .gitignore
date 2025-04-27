@@ -1,7 +1,8 @@
 ## Local files and directories
-*.vscode/
-*.idea/
-*.DS_Store
+.DS_Store
+.cache/
+.vscode/
+.idea/
 
 ## Build directories
 [Bb]uild/
