@@ -1,23 +1,22 @@
-## Local files and directories
+## OS-specific files
 .DS_Store
+Thumbs.db
+
+## IDE files
 .cache/
 .vscode/
 .idea/
+.zed/
 
 ## Build directories
-[Bb]uild/
-[Bb]ld/
 [Bb]in/
-[Oo]bj/
-[Oo]ut/
+[Bb]uild/
 [Dd]ebug/
 [Rr]elease/
 
 ## Object files
 *.o
-*.ko
 *.obj
-*.elf
 
 ## Linker output
 *.ilk
@@ -31,8 +30,6 @@
 ## Libraries
 *.lib
 *.a
-*.la
-*.lo
 
 ## Shared objects
 *.dll
@@ -44,21 +41,7 @@
 *.exe
 *.out
 *.app
-*.i*86
-*.x86_64
-*.hex
 
 ## Debug files
 *.dSYM/
-*.su
-*.idb
 *.pdb
-
-## Kernel Module Compile Results
-*.mod*
-*.cmd
-.tmp_versions/
-modules.order
-Module.symvers
-Mkfile.old
-dkms.conf

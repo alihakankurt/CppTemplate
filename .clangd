@@ -1,0 +1,11 @@
+Completion:
+    HeaderInsertion: Never
+
+Diagnostics:
+    UnusedIncludes: None
+
+Hover:
+    ShowAKA: false
+
+InlayHints:
+    Enabled: false
